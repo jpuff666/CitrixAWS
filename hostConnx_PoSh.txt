@@ -1,0 +1,12 @@
+asnp citrix*
+Get-ConfigZone
+
+//8ac30754-4675-430a-bf01-0c09626b57b8
+
+$zoneId = "8ac30754-4675-430a-bf01-0c09626b57b8"
+$password = ConvertTo-SecureString "role_based_auth" -AsPlainText -Force
+$server = "127.0.0.1"
+$port = "8888"
+$options = "ProxyHost=$server,ProxyPort=$port"
+
+New-Item -ConnectionType "AWS" -CustomProperties "" -HypervisorAddress @("https://ec2.amazonaws.com") -Path @("XDHyp:\Connections\test1") -Scope @() -UserName "role_based_auth" -SecurePassword $password -ZoneUid $zoneId -Metadata @{"Citrix_MachineManagement_Options" = $options} -Persist
